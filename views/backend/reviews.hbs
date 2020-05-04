@@ -1,0 +1,202 @@
+{{>jumbotron}}
+
+<!--    MODALS/POP UPS      -->
+
+
+<!-- EDIT REVIEW INFO -->
+<div class="modal fade" id="modaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Update Review Information</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        
+        <div class="md-form mb-4">
+            <div class="survey-head text-center"> 
+              <p>Updating a Review Information means only changing the course or the professor of the review but cannot edit the review content</p>
+        </div>
+          <select class="form-control" id="formcourseselect">
+              <option>N/A</option>
+              <option>Course 1</option>
+              <option>Course 2</option>
+          </select>
+          <label for="formcourseselect">Change Course</label>
+        </div>
+
+        <div class="md-form mb-4">
+          <select class="form-control" id="formcourseselect">
+            <option>N/A</option>
+            <option>Prof 1</option>
+            <option>Prof 2</option>
+          </select>
+          <label for="formcourseselect">Change Professor</label>
+        </div>
+
+        </div>
+
+      <div class="modal-footer d-flex justify-content-center">
+        <button  class="btn-primary btn-sm text-white">Change Course</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE USER 2 -->
+<div class="modal fade" id="modaldelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Delete Review</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="survey-head text-center"> 
+              <p><span class="font-weight-bold">Warning:</span> Deleting a Review means the user's review will be deleted, <span class="font-weight-bold">and it cannot be undone</span>
+              </p>
+        </div>
+ <div class="md-form mb-5">
+        <h3 class = "text-center">Are you sure want to delete this review?</h3>
+        <div class="form-check mb-4">
+            <input class="form-check-input" name="group1" type="radio" id="radio-179" value="option1">
+            <label class="form-check-label" for="radio-179">Yes</label>
+        </div>
+           <div class="form-check mb-4">
+            <input class="form-check-input" name="group1" type="radio" id="radio-279" value="option1">
+            <label class="form-check-label" for="radio-279">No</label>
+          </div>
+        </div>
+    </div>
+
+      <div class="modal-footer d-flex justify-content-center">
+        <button  class="btn-primary btn-sm text-white">Delete Review</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--    MAIN CONTENT        -->
+<ul class="nav nav-pills mb-3">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#home" role="tab" aria-controls="pills-home" aria-selected="true">Reviews</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#menu1" role="tab" aria-controls="pills-profile" aria-selected="false">Comments</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div id="home" class="tab-pane fade show active">
+    <div class= "row mt-sm-4 mt-md-0">
+      <div class="col-sm-12 col-md-8">
+        <div class="btn btn-primary">
+          <label>Show No. of Entries</label>
+          <select id = "noEntries" data-toggle="dropdown" class = "btn btn-primary dropdown-toggle">
+            <option class="dropdown-item" value = "10">10</option>
+            <option class="dropdown-item" value = "30">30</option>
+            <option class="dropdown-item" value = "50">50</option>
+            <option class="dropdown-item" value = "100">100</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <input id = "tableSearch" class="form-control" type="text" placeholder="Search" aria-label="Search">
+      </div> 
+    </div>
+    <div class= "row mt-sm-4 mt-md-0">
+      <h3>Reviews Information</h3>
+          <table class="table table-hover table-light mb-5" id = "myTable">
+            <thead class="thead-green">
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">ID Number</th>
+                <th scope="col">Professor</th>
+                <th scope="col">Course</th>
+                <th scope="col">Review Content</th>
+                <th scope="col" class="text-center">Action</th>
+               </tr>
+            </thead>
+            <tbody>
+              {{#each reviews}}
+              <tr>
+                <th scope="row"></th>
+                <td>{{revUser}}</td>
+                <td>{{revProf}}</td>
+                <td>{{revCourse}}</td>
+                <td>{{revContent}}</td>
+                <td>
+                  <div class="dropdown">
+                    <button class="btn btn-primary btn-sm text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" class="text-center" data-toggle="modal" data-target="#modaledit">Edit Review</a>
+                        <a class="dropdown-item" class="text-center" data-toggle="modal" data-target="#modaldelete">Delete Review</a>
+                        <a class="dropdown-item" class="text-center" href="/reviews/{{this._id}}">Go to Review</a>
+                      </div>
+                    </div>
+                  </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+          <nav aria-label="Page navigation example">
+            <ul id="paging" class="pagination justify-content-center">
+            </ul>
+          </nav>
+    </div>
+  </div>
+
+  <div id="menu1" class="tab-pane fade">
+    <div class= "row mt-sm-4 mt-md-0">
+      <div class="col-sm-12 col-md-8">
+        <div class="btn btn-primary">
+          <label>Show No. of Entries</label>
+          <select id = "noEntries" data-toggle="dropdown" class = "btn btn-primary dropdown-toggle">
+            <option class="dropdown-item" value = "10">10</option>
+            <option class="dropdown-item" value = "15">15</option>
+            <option class="dropdown-item" value = "50">50</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <input id = "tableSearch" class="form-control" type="text" placeholder="Search" aria-label="Search">
+      </div> 
+    </div>
+    <div class= "row mt-sm-4 mt-md-0">
+      <h3>Comments Information</h3>
+        <table class="table table-hover table-light mb-5" id = "myTable">
+          <thead class="thead-green">
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Professor</th>
+              <th scope="col">Review Content</th>
+              <th scope="col">Comment Content</th>
+              <th scope="col">Comment Author</th>
+              <th scope="col" class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"></th>
+              <td>A</td>
+              <td>B</td>
+              <td>C</td>
+              <td>X</td>
+              <td class="text-center"><a class="btn btn-primary btn-sm text-white" href="/reviews/{{this._id}}">Go to Review</a></td>
+            </tr>
+          </tbody>
+          </table>
+          <nav aria-label="Page navigation example">
+            <ul id="paging" class="pagination justify-content-center">
+            </ul>
+          </nav>
+    </div>
+  </div>
+  
+</div>
